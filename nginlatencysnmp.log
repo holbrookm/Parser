@@ -1,0 +1,15 @@
+2015-09-22 17:22:41,242 CRITICAL | trapgen | NGIN LATENCY SNMP | A2:The system Call Latency SNMP Application has failed according to the criteria.
+2015-09-22 17:24:36,906 CRITICAL | trapgen | NGIN LATENCY SNMP | A2:The system Call Latency SNMP Application has failed according to the criteria.
+2015-09-22 17:31:42,699 CRITICAL | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has failed according to the criteria
+2015-09-22 17:33:00,180 CRITICAL | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has failed according to the criteria
+2015-09-22 17:34:14,155 INFO | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has returned to accepted service levels
+2015-09-22 17:35:28,566 CRITICAL | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has failed according to the criteria
+2015-09-22 17:37:31,356 INFO | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has returned to accepted service levels
+2015-09-22 17:49:35,393 CRITICAL | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has failed according to the criteria
+2015-09-22 17:50:18,615 INFO | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has returned to accepted service levels
+2015-09-22 17:51:13,432 CRITICAL | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has failed according to the criteria
+2015-09-22 17:51:47,859 INFO | trapgen | NGIN LATENCY SNMP | A1:The system Call Latency has returned to accepted service levels
+2015-09-23 11:48:38,000 CRITICAL | check_db_alarm | NGIN LATENCY SNMP | An exception has occurred in check_db_alarm.check_latency_stats
+2015-09-23 11:48:38,000 CRITICAL | check_db_alarm | NGIN LATENCY SNMP | An exception has occurred in check_db_alarm.check_latency_stats
+2015-09-23 11:48:38,080 CRITICAL | trapgen | NGIN LATENCY SNMP | A2:The system Call Latency SNMP Application has failed according to the criteria.
+2015-09-23 11:48:38,080 CRITICAL | trapgen | NGIN LATENCY SNMP | A2:The system Call Latency SNMP Application has failed according to the criteria.

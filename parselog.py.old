@@ -1,0 +1,87 @@
+#!/usr/bin/python
+import os
+import class_latencytimes
+import mysqlcon
+from datetime import datetime
+
+time_format = "%Y-%m-%d %H:%M"
+
+"""
+    real_Time = real_Time.strftime (app_time_format)
+
+"""
+
+filename = 'statistics.log'
+
+with open(filename, 'rU') as log_file:
+    c1 = class_latencytimes.LatencyTimes()
+    while True:  
+        try:        
+            newline = log_file.next()
+            #print newline
+            if newline.endswith('Dumping counters:\n'):
+                entryDate = newline.split(' ')[0]
+                entryTime = newline.split(' ')[1].split(',')[0][0:-3] #Last [0:-3] removes seconds
+                print entryDate, entryTime
+                date = (str(entryDate +' ' + entryTime))
+                date1 = datetime.strptime(date, time_format)
+                print date1
+                c1.date = date
+                
+                # Continue loop parsing here without going back to main loop
+                HaveDate = True
+                while (HaveDate):
+                    newline = log_file.next()
+                    if newline.startswith('"TcapProviderManager" TCAP.System Latency:'):
+                        newline = log_file.next()
+                        count = int(newline.split(',')[-1].split('=')[-1])
+                        print count
+                        c1.TotalCalls = (count)
+                        newline = log_file.next()
+                        newline = log_file.next()
+                        max50 = int(newline.split(' ')[5])
+                        print max50
+                        c1.sub50 = (max50)
+                        newline = log_file.next()
+                        max100 = int(newline.split(' ')[4])
+                        print max100
+                        c1.sub100 = (max100)
+                        newline = log_file.next()
+                        max200 = int(newline.split(' ')[4])
+                        print max200
+                        c1.sub200 = (max200)
+                        newline = log_file.next()
+                        max300 = int(newline.split(' ')[4])
+                        print max300
+                        c1.sub300 = (max300)
+                        newline = log_file.next()
+                        max400 = int(newline.split(' ')[4])
+                        print max400
+                        c1.sub400 = (max400)
+                        newline = log_file.next()
+                        max2000 = int(newline.split(' ')[4])
+                        print max2000
+                        c1.sub2000 = (max2000)
+                        newline = log_file.next()
+                        max5000 = int(newline.split(' ')[4])
+                        print max5000
+                        c1.sub5000 = (max5000)
+                        newline = log_file.next()
+                        max8000 = int(newline.split(' ')[4])
+                        print max8000
+                        c1.sub8000 = (max8000)
+                        newline = log_file.next()
+                        min8000 = int(newline.split(' ')[3])
+                        print min8000
+                        c1.plus8000 = (min8000)
+                        HaveDate = False
+                        print "Entering DB"
+                        c1.commitToDatabase()
+                        break
+               
+        except:
+            break
+    del c1
+    log_file.close()
+    
+
