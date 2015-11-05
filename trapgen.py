@@ -10,9 +10,9 @@ email: marc.holbrook@eir.ie mob: 0851742253
 
 import commands
 import debug
-import logging_setup
+import logging_config
 
-applog = logging_setup.getLog("NGIN LATENCY SNMP")
+applog = logging_config.logger()
 
 def trapgensend ():
     

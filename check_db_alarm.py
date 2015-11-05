@@ -1,29 +1,45 @@
 #!/usr/bin/python
 
-""" This script will access the Mysql DB and check for unusual latency patterns.
+""" This script will access the DB and check for unusual latency patterns.
     #Marc Holbrook
     # 0851742253
     # <marc.holbrook@eir.ie>
     
 """
 
-import mysqlcon as mysql
 import debug
 from datetime import timedelta
-import logging_setup
+import logging_config
+
+from dbSetup import StatLogSCP1, Base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import func
+
+def connectToDB():
+    """
+    To connect to the Database create a session and bind with the Db.
+    """
+    Base = declarative_base()
+    engine = create_engine('sqlite:///DBLatency.db', echo=True)
+    Base.metadata.bind = engine
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    return session
 
 
 def getDate(delta):
     """ This function returns the real time minus 3 minute in a format required for the program.
 """
     debug.p("FUNC:check_db_alarm.getDate")
-    db, c = mysql.connectdb()
-    debug.p('select max(date) from StatLogSCP1')
-    c.execute ('select max(date) from StatLogSCP1')
-    max_Date = c.fetchone() #This return a tuple, 0 item is a datetime.datetime object
-    maxDate = max_Date[0]
-    deltaDate = maxDate - timedelta(minutes= delta)
-    c.close()
+    db = connectToDB()
+    debug.p('Get Max Date in DB')
+    date_entry = db.query(func.max(StatLogSCP1.date))
+    debug.p(date_entry)
+    #max_Date = c.fetchone() #This return a tuple, 0 item is a datetime.datetime object
+    #maxDate = max_Date[0]
+    deltaDate = date_entry - timedelta(minutes= delta)
     debug.p("**Leaving FUNC:check_db_alarm.getDate")
     return deltaDate
 

@@ -1,4 +1,4 @@
-!/usr/bin/python
+#!/usr/bin/python
 
 """ This file should contain functions need to SFTP to the NGIN to retieive the statistics.log file.
 
@@ -17,10 +17,10 @@ iusername = 'ocfs'
 ipassword = 'ocfs'
 iprivate_key_pass = 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAv/zHqtRlnDOE0Z1O3R2lV1m+nrND5Wbbrr+9gTsC7VuGhDHr847uksXFpZqBu2GP47lim0Fvy+P5FMOpV0OSeigkLP1OLvzvFWaUlqoIMEOvcjciuH6iycdLFHMfwzUl07wGQIE85j3W4bdo+KQu4jWmNhfwWOwBwT62ed4bCuk= ocfs@eirin11'
 
-def sftpconnect():
-    with pysftp.Connection(host = ihost, username = iusername, password = ipassword, private_key_pass = iprivate_key_pass) as sftp:
-        with sftp.cd('/opt/jnetx/ocfs/HA_Node1.SCP1/slee/log')
-            sftp.get('statistics.log', '.')
+def sftpconnectgetlogfile(host):
+    with pysftp.Connection(host, username = iusername, password = ipassword, private_key_pass = iprivate_key_pass) as sftp:
+        with sftp.cd('/opt/jnetx/ocfs/HA_Node1.SCP1/slee/log'):
+            sftp.get('statistics.log', '.') # Get statistics.log and place in current directory
     return
         
 
